@@ -41,3 +41,9 @@ require("lazy").setup({
     },
   },
 })
+
+vim.filetype.add({
+  extension = {
+    api = "goctl",
+  },
+})
