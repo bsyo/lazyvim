@@ -6,6 +6,16 @@ return {
     build = LazyVim.is_win() and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
 
     opts = {
+      -- provider = "ollama",
+      -- vendors = {
+      --   ollama = {
+      --     __inherited_from = "openai",
+      --     api_key_name = "",
+      --     endpoint = "http://127.0.0.1:11434/v1",
+      --     model = "deepseek-r1:14b-qwen-distill-q8_0",
+      --   },
+      -- },
+
       provider = "copilot",
       auto_suggestions_provider = "copilot",
       copilot = {
