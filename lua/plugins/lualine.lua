@@ -2,19 +2,32 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
-      -- 检查是否在 tmux 中
       local in_tmux = os.getenv("TMUX") ~= nil
 
       if in_tmux then
-        -- 在 tmux 中时的修改
-        opts.sections.lualine_b = {} -- 移除 git branch 信息
-        opts.sections.lualine_z = {} -- 移除时间显示
+        -- lualine_b: 替换为搜索和选择计数
+        opts.sections.lualine_b = {
+          {
+            "searchcount", -- 显示搜索匹配数量
+            maxcount = 999,
+            timeout = 500,
+          },
+          {
+            "selectioncount", -- 显示选中的字符/行数
+          },
+        }
 
-        -- 修改右侧信息，移除 git diff 信息
+        -- lualine_z:
+        opts.sections.lualine_z = {}
+
+        -- 修改右侧信息，移除 git diff 和 lazy 更新信息
         local x_components = {}
         for _, component in ipairs(opts.sections.lualine_x) do
-          -- 保留非 diff 的组件
-          if type(component) == "table" and component[1] ~= "diff" then
+          if
+            type(component) == "table"
+            and component[1] ~= "diff"
+            and not (type(component.cond) == "function" and component.cond == require("lazy.status").has_updates)
+          then
             table.insert(x_components, component)
           elseif type(component) == "function" or (type(component) == "string" and component ~= "diff") then
             table.insert(x_components, component)
