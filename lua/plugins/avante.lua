@@ -18,6 +18,10 @@ return {
 
       provider = "copilot",
       auto_suggestions_provider = "copilot",
+      behaviour = {
+        auto_suggestions = true,
+        enable_cursor_planning_mode = true, -- enable cursor planning mode!
+      },
       copilot = {
         model = "claude-3.5-sonnet",
         temperature = 0,
