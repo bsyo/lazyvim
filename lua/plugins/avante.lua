@@ -22,10 +22,14 @@ return {
         auto_suggestions = true,
         enable_cursor_planning_mode = true, -- enable cursor planning mode!
       },
-      copilot = {
-        model = "claude-3.5-sonnet",
-        temperature = 0,
-        max_tokens = 8192,
+      providers = {
+        copilot = {
+          model = "claude-sonnet-4",
+          -- extra_request_body = {
+          --   temperature = 0,
+          --   max_tokens = 8192,
+          -- },
+        },
       },
       hints = { enabled = false },
       file_selector = {
