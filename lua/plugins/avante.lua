@@ -16,13 +16,41 @@ return {
       --   },
       -- },
 
-      provider = "copilot",
       auto_suggestions_provider = "copilot",
       behaviour = {
         auto_suggestions = true,
         enable_cursor_planning_mode = true, -- enable cursor planning mode!
       },
       providers = {
+        openrouter = {
+          __inherited_from = "openai",
+          endpoint = "https://openrouter.ai/api/v1",
+          api_key_name = "OPENROUTER_API_KEY",
+          model = "moonshotai/kimi-k2",
+        },
+        groq = {
+          __inherited_from = "openai",
+          api_key_name = "GROQ_API_KEY",
+          endpoint = "https://api.groq.com/openai/v1/",
+          model = "moonshotai/kimi-k2-instruct",
+        },
+        zai = {
+          __inherited_from = "openai",
+          endpoint = "https://open.bigmodel.cn/api/paas/v4/",
+          model = "glm-4.5",
+        },
+        ollama = {
+          endpoint = "http://127.0.0.1:11434",
+          model = "deepseek-r1:14b-qwen-distill-q8_0",
+          timeout = 30000, -- Timeout in milliseconds
+          extra_request_body = {
+            options = {
+              temperature = 0.75,
+              num_ctx = 20480,
+              keep_alive = "5m",
+            },
+          },
+        },
         copilot = {
           model = "claude-sonnet-4",
           -- extra_request_body = {
